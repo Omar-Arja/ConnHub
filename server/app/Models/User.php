@@ -12,6 +12,7 @@ class User extends Authenticatable implements JWTSubject
     use HasFactory, Notifiable;
 
     protected $fillable = [
+        'usertype_id',
         'name',
         'email',
         'password',
@@ -22,8 +23,8 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+    protected $appends = [
+        'usertype_name',
     ];
 
     public function getJWTIdentifier()
@@ -34,5 +35,22 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    // Relationships
+    public function usertype()
+    {
+        return $this->belongsTo(Usertype::class);
+    }
+
+    public function serviceProvider()
+    {
+        return $this->hasOne(ServiceProvider::class);
+    }
+
+    // Accessors
+    public function getUsertypeNameAttribute()
+    {
+        return $this->usertype()->first()->name;
     }
 }
