@@ -49,7 +49,6 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'usertype' => 'required|string|max:255|exists:usertypes,name',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
@@ -62,7 +61,7 @@ class AuthController extends Controller
             ], 422);
         }
 
-        $usertype_id = Usertype::getUsertypeId($request->usertype);
+        $usertype_id = Usertype::getUsertypeId('Pending');
 
         $user = User::create([
             'usertype_id' => $usertype_id,
