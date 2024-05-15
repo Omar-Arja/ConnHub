@@ -15,6 +15,7 @@ class UsertypeSeeder extends Seeder
     {
         $usertypes = [
             'Admin',
+            'Pending',
             'Client',
             'Service Provider',
         ];
