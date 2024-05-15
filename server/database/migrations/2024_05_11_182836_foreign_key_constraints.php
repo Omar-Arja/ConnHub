@@ -15,7 +15,7 @@ return new class extends Migration
             $table->foreign('usertype_id')->references('id')->on('usertypes')->onDelete('cascade');
         });
 
-        Schema::table('service_provider', function (Blueprint $table) {
+        Schema::table('service_providers', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->dropForeign(['usertype_id']);
         });
 
-        Schema::table('service_provider', function (Blueprint $table) {
+        Schema::table('service_providers', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
 
