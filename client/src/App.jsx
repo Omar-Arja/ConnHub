@@ -5,6 +5,7 @@ import RegisterChoicePage from "./pages/Auth/RegisterChoicePage";
 import RegisterClientPage from "./pages/Auth/RegisterClientPage";
 import RegisterServiceProviderPage from "./pages/Auth/RegisterServiceProviderPage";
 import Login from "./pages/Auth/LoginPage";
+import Search from "./pages/Main/Search";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -20,6 +21,7 @@ const App = () => {
           path="/register/service-provider"
           element={<RegisterServiceProviderPage />}
         />
+        <Route path="/home" element={<Search />} />
       </Routes>
     </Router>
   );
