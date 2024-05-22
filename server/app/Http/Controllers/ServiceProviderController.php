@@ -18,8 +18,8 @@ class ServiceProviderController extends Controller
             'service_description' => 'required|string|max:255',
             'service_category' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'service_price_min' => 'required|numeric',
-            'service_price_max' => 'required|numeric|gt:service_price_min',
+            'service_price_min' => 'nullable|numeric',
+            'service_price_max' => 'nullable|numeric|gt:service_price_min',
             'calendly_link' => 'required|string|max:255',
         ]);
 
@@ -59,8 +59,8 @@ class ServiceProviderController extends Controller
             'service_description' => 'required|string|max:255',
             'service_category' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'service_price_min' => 'required|numeric',
-            'service_price_max' => 'required|numeric|gt:service_price_min',
+            'service_price_min' => 'nullable|numeric',
+            'service_price_max' => 'nullable|numeric|gt:service_price_min',
             'calendly_link' => 'required|string|max:255',
         ]);
 
@@ -134,8 +134,8 @@ class ServiceProviderController extends Controller
 
         $validator = Validator::make($request->all(), [
             'search_query' => 'required|string|max:255',
-            'price_min' => 'required|numeric',
-            'price_max' => 'required|numeric|gt:price_min',
+            'price_min' => 'nullable|numeric',
+            'price_max' => 'nullable|numeric|gt:price_min',
         ]);
 
         if ($validator->fails()) {
@@ -150,10 +150,17 @@ class ServiceProviderController extends Controller
                 ->orWhereRaw('LOWER(service_category) LIKE ?', ['%' . strtolower($request->search_query) . '%'])
                 ->orWhereRaw('LOWER(service_description) LIKE ?', ['%' . strtolower($request->search_query) . '%'])
                 ->orWhereRaw('LOWER(location) LIKE ?', ['%' . strtolower($request->search_query) . '%']);
-        })
-            ->where('service_price_min', '<=', $request->price_min)
-            ->where('service_price_max', '<=', $request->price_max)
-            ->get();
+        });
+
+        if ($request->has('price_min')) {
+            $serviceProviders->where('service_price_min', '>=', $request->price_min);
+        }
+
+        if ($request->has('price_max')) {
+            $serviceProviders->where('service_price_max', '<=', $request->price_max);
+        }
+
+        $serviceProviders = $serviceProviders->get();
 
         return response()->json(['status' => 'success', 'data' => ['serviceProviders' => $serviceProviders]], 200);
     }
