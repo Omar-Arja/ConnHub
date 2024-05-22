@@ -60,7 +60,7 @@ const Login = ({ setUser }) => {
   return (
     <div className="auth-container">
       <div className="auth-form">
-        <h2>Instagram</h2>
+        <h2>ConnHub</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="email"
