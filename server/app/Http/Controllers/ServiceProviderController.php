@@ -128,10 +128,6 @@ class ServiceProviderController extends Controller
     {
         $user = $request->user();
 
-        if ($user->usertype_name != 'Client') {
-            return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
-        }
-
         $validator = Validator::make($request->all(), [
             'search_query' => 'required|string|max:255',
             'price_min' => 'nullable|numeric',
