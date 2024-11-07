@@ -1,0 +1,90 @@
+body{
+    background-image: url(../../assets/vecteezy_internet-connection-concept-of-global-business-elements-of_2928551.jpg) !important;
+}
+
+h1{
+    color: #878787;
+}
+
+.pricing-page {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: transparent;
+}
+
+.pricing-header {
+    margin-bottom: 50px;
+}
+
+.pricing-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.pricing-header p {
+    font-size: 18px;
+    color: #777;
+}
+
+.pricing-plans {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.plan {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.plan:hover {
+    transform: translateY(-10px);
+}
+
+.plan h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.plan .price {
+    font-size: 22px;
+    margin: 20px 0;
+    color: #333;
+}
+
+.plan ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.plan ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.plan button {
+    background-color: #00ffff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.plan button:hover {
+    background-color: #0056b3;
+}
+
+.plan.popular {
+    border: 2px solid #00ffff;
+}

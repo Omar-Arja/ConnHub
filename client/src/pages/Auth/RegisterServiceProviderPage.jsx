@@ -116,8 +116,11 @@ const RegisterServiceProviderPage = () => {
   };
 
   return (
+    <div>
     <div className="auth-container">
       <div className="auth-form">
+        <h1 class="title--spaces desktop-xxl mobile-l">ConnHub</h1>
+        <h2 class="subtitle">No matter how complicated it is, We connect you</h2>
         <h2>Register as Service Provider</h2>
         <form onSubmit={handleSubmit}>
           <input
@@ -210,6 +213,7 @@ const RegisterServiceProviderPage = () => {
           Already have an account? <Link to="/signin">Log In</Link>
         </p>
       </div>
+    </div>
     </div>
   );
 };

@@ -55,6 +55,8 @@ class ServiceProviderController extends Controller
     public function updateServiceProviderProfile(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
             'service_name' => 'required|string|max:255',
             'service_description' => 'required|string|max:255',
             'service_category' => 'required|string|max:255',
@@ -71,10 +73,16 @@ class ServiceProviderController extends Controller
             ], 422);
         }
 
+
         $user = $request->user();
 
-        if ($user->usertype_name == 'ServiceProvider') {
-            $user->serviceProviderProfile->update([
+    // Ensure user type comparison is correct
+    if ($user->usertype_name == 'Service Provider') {
+        $serviceProviderProfile = $user->serviceProviderProfile;
+
+        // Ensure the service provider profile exists
+        if ($serviceProviderProfile) {
+            $serviceProviderProfile->update([
                 'service_name' => $request->service_name,
                 'service_description' => $request->service_description,
                 'service_category' => $request->service_category,
@@ -84,18 +92,29 @@ class ServiceProviderController extends Controller
                 'calendly_link' => $request->calendly_link,
             ]);
 
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+
             return response()->json(['status' => 'success', 'message' => 'Service provider profile updated successfully'], 200);
         } else {
+            return response()->json(['status' => 'error', 'message' => 'Service provider profile not found'], 404);
+        }
+    } else {
             return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
         }
     }
 
     public function getCurrentServiceProviderProfile(Request $request)
     {
-        $user = Auth::user();
+        $user = $request->user();
+        $user1 = $user->serviceProviderProfile;
 
-        if ($user->usertype_name == 'Service Provider') {
-            return response()->json(['status' => 'success', 'data' => ['serviceProviderProfile' => $user->serviceProviderProfile]], 200);
+ 
+        if ($user->userType_name == 'Service Provider') {
+            
+            return response()->json(['status' => 'success', 'data' => ['serviceProviderProfile' => $user],['serviceProviderProfile1' => $user1] ], 200);
         } else {
             return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
         }
@@ -103,14 +122,14 @@ class ServiceProviderController extends Controller
 
     public function getServiceProviderProfile(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = user::find($id);
         if (!$user) {
             return response()->json(['status' => 'error', 'message' => 'Service provider not found'], 404);
         }
 
         if ($user->usertype_name == 'Service Provider') {
             return response()->json(['status' => 'success', 'data' => [
-                'user' => $user->with('serviceProvider')->first(),
+                'user' => $user->with('serviceProvider')->where('id', $id)->get(),
             ]], 200);
         } else {
             return response()->json(['status' => 'error', 'message' => 'User is not a service provider'], 404);
@@ -119,7 +138,7 @@ class ServiceProviderController extends Controller
 
     public function getAllServiceProviders()
     {
-        $serviceProviders = User::where('usertype_id', Usertype::getUsertypeId('Service Provider'))->get();
+        $serviceProviders = ServiceProvider::with('user')->get();
 
         return response()->json(['status' => 'success', 'data' => ['serviceProviders' => $serviceProviders]], 200);
     }
@@ -160,4 +179,6 @@ class ServiceProviderController extends Controller
 
         return response()->json(['status' => 'success', 'data' => ['serviceProviders' => $serviceProviders]], 200);
     }
+
+    
 }

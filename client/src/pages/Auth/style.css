@@ -1,10 +1,13 @@
+body{
+  background-image: url(../../assets/vecteezy_internet-connection-concept-of-global-business-elements-of_2928551.jpg);
+}
+
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   min-width: 100vw;
-  background-color: #f0f0f0;
 }
 
 .auth-form {

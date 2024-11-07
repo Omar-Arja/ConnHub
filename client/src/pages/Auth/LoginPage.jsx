@@ -35,7 +35,7 @@ const Login = ({ setUser }) => {
           button.textContent = "Success";
 
           const token = res.data.authorisation.token;
-          const headers = "bearer " + token;
+          const headers = "Bearer " + token;
 
           localStorage.setItem("headers", headers);
           setUser(res.data.user);
@@ -61,6 +61,7 @@ const Login = ({ setUser }) => {
     <div className="auth-container">
       <div className="auth-form">
         <h2>ConnHub</h2>
+        <h2 class="subtitle">No matter how complicated it is, We connect you</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="email"

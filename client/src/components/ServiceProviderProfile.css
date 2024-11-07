@@ -1,0 +1,52 @@
+.actions {
+    margin-top: 20px;
+}
+
+.actions button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.reviews-section, .related-services {
+    margin-top: 40px;
+}
+
+.reviews-section h2, .related-services h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.actions form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.actions form div {
+    margin-bottom: 10px;
+}
+
+.actions form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.actions form input,
+.actions form textarea {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.actions form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.actions p {
+    margin-top: 10px;
+    font-weight: bold;
+}

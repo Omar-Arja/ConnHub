@@ -19,6 +19,8 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('client')->group(function () {
         // By Pending
         Route::post('profile', [ClientController::class, 'createClientProfile']);
+        Route::get('view-client', [ClientController::class, 'getClientProfile']);
+        Route::put('update', [ClientController::class, 'updateClientProfile']);
     });
 
     Route::prefix('service-provider')->group(function () {
@@ -27,9 +29,10 @@ Route::middleware('auth:api')->group(function () {
 
         // By ServiceProvider
         Route::put('update', [ServiceProviderController::class, 'updateServiceProviderProfile']);
+        Route::get('view-service-provider', [ServiceProviderController::class, 'getCurrentServiceProviderProfile']);
 
         // By Client
-        Route::get('', [ServiceProviderController::class, 'getCurrentServiceProviderProfile']);
+        Route::get('view-current', [ServiceProviderController::class, 'getCurrentServiceProviderProfile']);
         Route::get('/id/{id}', [ServiceProviderController::class, 'getServiceProviderProfile']);
         Route::get('all', [ServiceProviderController::class, 'getAllServiceProviders']);
         Route::get('search', [ServiceProviderController::class, 'searchServiceProviders']);

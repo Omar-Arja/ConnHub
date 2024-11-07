@@ -6,7 +6,6 @@ const ServiceProviderBox = ({
   location,
   service_price_min,
   service_price_max,
-  calendly_link,
 }) => {
   return (
     <div className="service-provider-box">
@@ -24,9 +23,6 @@ const ServiceProviderBox = ({
         <strong>Price Range:</strong> ${service_price_min} - $
         {service_price_max}
       </p>
-      <a href={calendly_link} target="_blank" rel="noopener noreferrer">
-        Schedule Appointment
-      </a>
     </div>
   );
 };

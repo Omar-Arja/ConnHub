@@ -43,6 +43,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Usertype::class);
     }
 
+    
+    public function serviceProviderProfile()
+    {
+        return $this->hasOne(ServiceProvider::class, 'user_id'); // Adjust the foreign key if needed
+    }
+
     public function serviceProvider()
     {
         return $this->hasOne(ServiceProvider::class);
